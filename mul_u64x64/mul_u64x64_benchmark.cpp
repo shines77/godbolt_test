@@ -353,7 +353,7 @@ void mul_u64x64_benchmark()
     std::vector<uint64_t> test_data;
     test_data.resize(kDataLength * 2);
     for (size_t i = 0; i < kDataLength * 2; i++) {
-        rand_u64s[i] = next_random_u64();
+        test_data[i] = next_random_u64();
     }
 
     run_mul_u64x64_benchmark<MUL_U64x64_X64>   (test_data, "mul_u64x64_x64");
