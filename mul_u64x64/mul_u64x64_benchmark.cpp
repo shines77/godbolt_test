@@ -318,19 +318,19 @@ void run_mul_u64x64_benchmark(const std::vector<uint64_t> & test_data, std::stri
     sw.start();
     if (test_id == MUL_U64x64_X64) {
         for (size_t i = 0; i < test_data.size(); i += 2) {
-            jstd::_uint128_t product128 = jstd::_uint128_t::mul_u64x64(a, b);
+            jstd::_uint128_t product128 = jstd::_uint128_t::mul_u64x64(test_data[i], test_data[i + 1]);
             check_sum += product128.low + product128.high;
         }
     }
     else if (test_id == MUL_U64x64_I386) {
         for (size_t i = 0; i < test_data.size(); i += 2) {
-            jstd::_uint128_t product128 = jstd::_uint128_t::mul_u64x64_i386(a, b);
+            jstd::_uint128_t product128 = jstd::_uint128_t::mul_u64x64_i386(test_data[i], test_data[i + 1]);
             check_sum += product128.low + product128.high;
         }
     }
     else if (test_id == MUL_U64x64_ARM_V6) {
         for (size_t i = 0; i < test_data.size(); i += 2) {
-            jstd::_uint128_t product128 = jstd::_uint128_t::mul_u64x64_armv6(a, b);
+            jstd::_uint128_t product128 = jstd::_uint128_t::mul_u64x64_armv6(test_data[i], test_data[i + 1]);
             check_sum += product128.low + product128.high;
         }
     }
