@@ -571,6 +571,34 @@ std::uint32_t fast_div_u32(std::uint32_t value, std::uint32_t divisor)
 
 #endif // __amd64__
 
+static inline
+uint32_t next_random_u32()
+{
+#if (RAND_MAX == 0x7FFF)
+    uint32_t rnd32 = (((uint32_t)rand() & 0x03) << 30) |
+                      ((uint32_t)rand() << 15) |
+                       (uint32_t)rand();
+#else
+    uint32_t rnd32 = ((uint32_t)rand() << 16) | (uint32_t)rand();
+#endif
+    return rnd32;
+}
+
+static inline
+uint64_t next_random_u64()
+{
+#if (RAND_MAX == 0x7FFF)
+    uint64_t rnd64 = (((uint64_t)rand() & 0x0F) << 60) |
+                      ((uint64_t)rand() << 45) |
+                      ((uint64_t)rand() << 30) |
+                      ((uint64_t)rand() << 15) |
+                       (uint64_t)rand();
+#else
+    uint64_t rnd64 = ((uint64_t)rand() << 32) | (uint64_t)rand();
+#endif
+    return rnd64;
+}
+
 void compile_time_div_test()
 {
     unsigned int num = rand();
@@ -584,8 +612,8 @@ void compile_time_div_test()
 
 void uint128_test()
 {
-    std::uint64_t rnd_low = ((std::uint64_t)rand() << 48) | ((std::uint64_t)rand() << 32) | rand();
-    std::uint64_t rnd_high = ((std::uint64_t)rand() << 48) | ((std::uint64_t)rand() << 32) | rand();
+    std::uint64_t rnd_low = next_random_u64():
+    std::uint64_t rnd_high = next_random_u64();
     std::uint64_t divisor = ((std::uint64_t)rand() << 32) | rand() + 1;
 
     __uint128_t rnd128 = ((__uint128_t)rnd_high << 64) | rnd_low;
@@ -594,9 +622,9 @@ void uint128_test()
     printf("%llu / %llu = %llu, ", (std::uint64_t)rnd128, (std::uint64_t)divisor128, (std::uint64_t)p);
 }
 
-int main()
+int main(int argc, char * argv[])
 {
-	srand(time(NULL));
+    srand((unsigned)time(NULL));
 
     std::uint32_t rnd = rand();
     std::uint32_t divisor = rand();
