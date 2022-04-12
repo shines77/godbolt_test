@@ -11,6 +11,8 @@
 #include <cstdint>
 #include <cstddef>
 #include <cstdbool>
+#include <string>
+#include <cstring>
 #include <vector>
 #include <algorithm>
 #include <type_traits>
