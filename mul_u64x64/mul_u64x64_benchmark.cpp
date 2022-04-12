@@ -23,7 +23,7 @@
 
 extern void print_marcos();
 
-static const size_t kDataLength = 1000000;
+static const size_t kDataLength = 10000000;
 
 enum TestId {
     MUL_U64x64_X64,
@@ -341,7 +341,7 @@ void run_mul_u64x64_benchmark(const std::vector<uint64_t> & test_data, std::stri
 
     double elapsedTime = sw.getElapsedMillisec();
 
-    printf("===============================================================================\n");
+    printf("===============================================================================\n\n");
     printf("function = %s()\n", name.c_str());
     printf("check_sum = %" PRIu64 ", elapsedTime: %0.2f ms\n\n", check_sum, elapsedTime);
 }
