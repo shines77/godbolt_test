@@ -30,13 +30,31 @@ https://www.godbolt.org/#z:OYLghAFBqd5QCxAYwPYBMCmBRdBLAF1QCcAaPECAMzwBtMA7AQwFt
 * x86-64 gcc 11.2:
 
     ```text
-    -std=gnu++14 -O3 -Wall -march=haswell
+    -std=c++11 -O3 -Wall -march=native -DNDEBUG
+    -std=c++11 -O3 -Wall -march=skylake -DNDEBUG
+    -std=gnu++14 -O3 -Wall -march=haswell -DNDEBUG
     ```
 
-* x86-64 clang 12.0.1: 
+    ```text
+    '-march=' switch are: nocona core2 nehalem corei7 westmere sandybridge corei7-avx ivybridge core-avx-i haswell core-avx2 broadwell skylake skylake-avx512 cannonlake icelake-client rocketlake icelake-server cascadelake tigerlake cooperlake sapphirerapids alderlake bonnell atom silvermont slm goldmont goldmont-plus tremont knl knm x86-64 x86-64-v2 x86-64-v3 x86-64-v4 eden-x2 nano nano-1000 nano-2000 nano-3000 nano-x2 eden-x4 nano-x4 k8 k8-sse3 opteron opteron-sse3 athlon64 athlon64-sse3 athlon-fx amdfam10 barcelona bdver1 bdver2 bdver3 bdver4 znver1 znver2 znver3 btver1 btver2 native;
+    ```
+
+* x86-64 clang 12.0.1:
 
     ```text
-    -O3 -Wall -march=haswell
+    -std=c++11 -O3 -Wall -march=native -DNDEBUG
+    -std=c++14 -O3 -Wall -march=haswell -DNDEBUG
+    ```
+
+* MSVC:
+
+    ```bash
+    ## No /MT /MD
+    /O2 /W3 /WX- /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /GS /GL /Gy /Zi /Gm- /Gd /Oi /EHsc /nologo /Zc:inline /fp:precise
+    ## /MT
+    /O2 /W3 /WX- /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /GS /GL /Gy /Zi /Gm- /Gd /Oi /MT /EHsc /nologo /Zc:inline /fp:precise
+    ## /MD
+    /O2 /W3 /WX- /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /GS /GL /Gy /Zi /Gm- /Gd /Oi /MD /EHsc /nologo /Zc:inline /fp:precise /MACHINE:X64
     ```
 
 ## 4. Copyright
